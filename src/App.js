@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+//To make useContext, you'll have to createContext first, no matter what! First, make createContext => Then to use, you'll have to do => useContext
+import { createContext } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import YellowPage from "./components/YellowPage";
+import GreenPage from "./components/GreenPage";
 
-function App() {
+//Make  A Variable of ColorContext with the value of dark
+export const ColorContext = createContext("dark");
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorContext.Provider value={"light"}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/yellow" element={<YellowPage />} />
+          <Route path="/green" element={<GreenPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ColorContext.Provider>
   );
-}
+};
 
 export default App;
